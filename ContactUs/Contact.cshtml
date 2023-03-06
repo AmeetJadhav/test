@@ -1,0 +1,165 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@model JBMWebsite.Models.MailModel
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        window.setTimeout(function() {
+            $("#CaptchaImage").nextAll('a').hide();
+        }, 500);
+    });
+
+</script>
+
+<section class="our-features ">
+    <div class="common-header text-center">
+        <h2>OFFICES</h2>
+    </div>
+
+    <div class="container">
+        <div class="custome-row">
+            <div class="col-lg-6 blue-box  aos-item" data-aos="fade-right">
+                <div class="ft-box-content">
+                    <h5>Middle East Head Office</h5>
+                    <p>
+                        Jupiter Business Systems FZC
+                        Office Suite 48, Z1 Building,
+                        SAIF Zone, P.O.Box.9398, Sharjah, UAE
+                        Ph: +971 6 5574278, Fax: +971 6 5574279.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 white-box aos-item" data-aos="fade-left">
+                <div class="ft-box-content">
+                    <h5>India Sales Office</h5>
+                    <p>
+                        Amplitude Software Systems Pvt Ltd
+                        A-246, Balaji Bhavan, Sector - 11, CBD Belapur,
+                        Navi Mumbai - 400 614, Maharashtra, India
+                        Ph: +91 22 41277120/21/22/23.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="custome-row-2">
+            <div class=" col-lg-6 white-box aos-item" data-aos="fade-right">
+                <div class="ft-box-content">
+                    <h5>Development/Support Centre</h5>
+                    <p>
+                        Amplitude Software Systems Pvt Ltd
+                        Robson Paul Tower (R P Tower), 1/879 A Masjid Road, P O Ayyanthole,
+                        Thrissur - 680 003, Kerala, India
+                        Ph: +91 487 2362489.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 blue-box aos-item" data-aos="fade-left">
+                <div class="ft-box-content">
+                    <h5>Bangalore Development Centre</h5>
+                    <p>
+                        Amplitude Software Systems Pvt Ltd
+                        1329, 24th Main Road, Sector 2, HSR Layout,
+                        Bangalore - 560 102, Bangalore, India.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section ="our-features ">
+    @using (Html.BeginForm("SendEmail", "ContactUs", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "contact-form", role = "form" }))
+    {
+        @Html.ValidationSummary()
+        <div class="contact-info">
+            <form>
+                <div class="form-group row">
+                    <label for="inputSubject" class="col-sm-2 col-form-label">Subject</label>
+                    <div class="col-sm-3">
+                        @Html.DropDownListFor(model => model.Subject, new SelectList(
+                                  new List<Object>{
+                                       new { value = "0" , text = "----Select----"  },
+                                       new { value = "General" , text = "General"  },
+                                       new { value = "Inquiry" , text = "Inquiry" },
+                                       new { value = "Complaints" , text = "Complaints"}
+                                    },
+                                  "value",
+                                  "text"), new { @class = "form-control" })
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputSalutation" class="col-sm-2 col-form-label">Salutation </label>
+                    <div class="form-check">
+                        <label class="form-check-label" for="gridRadios1">
+                            @Html.RadioButtonFor(Model => Model.Salutation, "Mr") Mr
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        @*<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">*@
+                        <label class="form-check-label" for="gridRadios2">
+                            @Html.RadioButtonFor(Model => Model.Salutation, "Mrs") Mrs
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        @*<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">*@
+                        <label class="form-check-label" for="gridRadios3">
+                            @Html.RadioButtonFor(Model => Model.Salutation, "Ms") Ms
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(model => model.Name, new { @placeholder = "Name", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputCompName" class="col-sm-2 col-form-label">Company Name</label>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(model => model.CompanyName, new { @placeholder = "Company Name", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputDesignation" class="col-sm-2 col-form-label">Designation</label>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(model => model.Designation, new { @placeholder = "Designation", @class = "form-control" })
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.Phone, new { @placeholder = "Phone", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.Email, new { @placeholder = "Email", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputRemarks" class="col-sm-2 col-form-label">Remarks</label>
+                        <div class="col-sm-3">
+                            @Html.TextAreaFor(model => model.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            @Html.MathCaptcha()
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+</form>
+        </div>
+    }
+    </section>
+
+
